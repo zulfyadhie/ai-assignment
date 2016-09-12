@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main_layout">
+<head></head>
+<body>
+<th:block layout:fragment="css-addition">
+  <link rel="stylesheet" th:href="@{/assets/plugins/datatables/dataTables.bootstrap.css}"/>
+  <link rel="stylesheet" th:href="@{/assets/plugins/datatables/jquery.dataTables.css}"/>
+</th:block>
+<th:block layout:fragment="content">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 th:text="#{errorpage.404.title}"/>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="error-page">
+      <h2 class="headline text-yellow" th:text="#{errorpage.404.code}"/>
+      <div class="error-content">
+        <h3><i class="fa fa-warning text-yellow"></i> <th:block th:text="#{errorpage.404.header}"/></h3>
+        <p th:text="#{errorpage.404.content}"/>
+      </div><!-- /.error-content -->
+    </div><!-- /.error-page -->
+  </section><!-- /.content -->
+
+</th:block>
+</body>
+</html>

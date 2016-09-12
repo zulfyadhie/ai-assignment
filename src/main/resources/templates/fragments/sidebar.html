@@ -1,0 +1,15 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <aside class="main-sidebar" th:fragment="sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header" th:text="#{menu.header}"/>
+                <li th:class="${#strings.startsWith(#httpServletRequest.requestURI,'/product')}? active"><a th:href="@{/product}"><i class="fa fa-dashboard"></i> <span th:text="#{menu.product}"/></a></li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+</html>
