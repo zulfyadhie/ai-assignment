@@ -78,15 +78,18 @@
                 </div>
             </div>
             <div class="box-body">
-                <!--<table id="productTableId" dt:table="true" dt:serverside="true"-->
-                       <!--dt:processing="true" dt:url="@{/ajax/product/list}" dt:pipelining="true" dt:pipesize="6">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th dt:property="name" th:text="#{product.label.name}" dt:filterable="true" dt:sortInitOrder="0" dt:sortInitDirection="asc"/>-->
-                        <!--<th dt:property="id" dt:renderFunction="renderViewLink" th:text="#{global.table.action}" dt:filterable="false" dt:searchable="false" dt:sortable="false"/>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                <!--</table>-->
+                <table id="productTableId" dt:table="true" dt:serverside="true"
+                       dt:processing="true" dt:url="@{/ajax/product/list}" dt:pipelining="true">
+                    <thead>
+                    <tr>
+                        <th dt:property="name" th:text="#{product.label.name}" dt:filterable="true" dt:sortInitOrder="0" dt:sortInitDirection="asc"/>
+                        <th dt:property="price" th:text="#{product.label.price}"/>
+                        <th dt:property="category.name" th:text="#{product.label.category}" dt:filterable="true"/>
+                        <th dt:property="available" th:text="#{product.label.available}" dt:filterable="true"/>
+                        <th dt:property="id" dt:renderFunction="renderViewLink" th:text="#{global.table.action}" dt:filterable="false" dt:searchable="false" dt:sortable="false"/>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </section><!-- /.content -->
@@ -97,7 +100,7 @@
         /*<![CDATA[*/
 
         function renderViewLink(data, type, full) {
-            return '<div class="table-action"><button class="btn btn-warning btn-gradient dark"><a href="/setting/product/detail?id=' + full.id +'"><i class="fa fa-pencil-square-o" title="edit"></i></a></button>&nbsp;' +
+            return '<div class="table-action"><a class="btn btn-warning btn-gradient dark" href="/product/detail?id=' + full.id +'"><i class="fa fa-pencil-square-o" title="edit"></i></a>&nbsp;' +
                     '<button class="btn btn-danger btn-gradient dark" data-toggle="modal" data-target="#deleteConfirmationModal" data-id="' + full.id + '"data-code="' + full.name + '"><i class="fa fa-trash-o" title="delete"></i></button></div>';
         }
 

@@ -7,6 +7,8 @@ import com.dpbg.service.ProductService;
 import com.github.dandelion.datatables.core.ajax.DataSet;
 import com.github.dandelion.datatables.core.ajax.DatatablesCriterias;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,17 +39,20 @@ public class ProductServiceImpl implements ProductService{
     @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED, rollbackFor = Exception.class, timeout = 30)
     public Product save(Product entity) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Product product;
         if(entity.getId() != null){
-            product = new Product();
+            product = productDao.findOne(entity.getId());
             product.setId(entity.getId());
             product.setName(entity.getName());
             product.setDescription(entity.getDescription());
             product.setPrice(entity.getPrice());
             product.setCategory(entity.getCategory());
             product.setAvailable(entity.getAvailable());
+            product.setUpdatedBy(auth.getName());
         }else{
             product = entity;
+            product.setCreatedBy(auth.getName());
         }
         return productDao.save(product);
     }

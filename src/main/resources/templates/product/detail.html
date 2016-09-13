@@ -12,19 +12,19 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <th:block th:text="#{menu.setting.organization}"/>
-            <small th:text="#{menu.setting.organization.detail}"/>
+            <th:block th:text="#{menu.product}"/>
+            <small th:text="#{menu.product.detail}"/>
         </h1>
         <ol class="breadcrumb">
             <li><a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> <th:block th:text="#{crumb.home}"/></a></li>
-            <li><a th:href="@{/setting/organization}"><th:block th:text="#{crumb.setting.organization}"/></a></li>
-            <li class="active" th:text="#{crumb.setting.organization.detail}"/>
+            <li><a th:href="@{/product}"><th:block th:text="#{crumb.product}"/></a></li>
+            <li class="active" th:text="#{crumb.product.detail}"/>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <form th:object="${organizationForm}" method="post" th:action="@{/setting/organization/detail}" role="form">
+        <form th:object="${productForm}" method="post" th:action="@{/product/detail}" role="form">
             <div class="box">
                 <div class="box-header with-border">
                     <div class="alert alert-danger alert-dismissable" th:if="${errorMsg != null}">
@@ -37,18 +37,39 @@
                 <div class="box-body">
                     <input type="hidden" th:field="*{id}"/>
                     <div th:attr="class=${#fields.hasErrors('name') ? 'form-group has-error' : 'form-group'}">
-                        <label for="name" th:text="#{organization.label.name}"/>
-                        <input type="text" class="form-control" id="name" th:placeholder="#{organization.label.name}" th:field="*{name}"/>
+                        <label for="name" th:text="#{product.label.name}"/>
+                        <input type="text" class="form-control" id="name" th:placeholder="#{product.label.name}" th:field="*{name}"/>
                         <span class="help-block"><th:block th:each="err : ${#fields.errors('name')}" th:text="${err}"/></span>
                     </div>
-                    <div th:attr="class=${#fields.hasErrors('address') ? 'form-group has-error' : 'form-group'}">
-                        <label for="address" th:text="#{organization.label.address}"/>
-                        <textarea id="address" class="textarea" th:field="*{address}"></textarea>
-                        <span class="help-block"><th:block th:each="err : ${#fields.errors('address')}" th:text="${err}"/></span>
+                    <div th:attr="class=${#fields.hasErrors('description') ? 'form-group has-error' : 'form-group'}">
+                        <label for="description" th:text="#{product.label.description}"/>
+                        <textarea id="description" class="textarea" th:field="*{description}"></textarea>
+                        <span class="help-block"><th:block th:each="err : ${#fields.errors('description')}" th:text="${err}"/></span>
+                    </div>
+                    <div th:attr="class=${#fields.hasErrors('price') ? 'form-group has-error' : 'form-group'}">
+                        <label for="price" th:text="#{product.label.price}"/>
+                        <input type="text" class="form-control" id="price" th:placeholder="#{product.label.price}" th:field="*{price}"/>
+                        <span class="help-block"><th:block th:each="err : ${#fields.errors('price')}" th:text="${err}"/></span>
+                    </div>
+                    <div th:attr="class=${#fields.hasErrors('category') ? 'form-group has-error' : 'form-group'}">
+                        <label for="category" th:text="#{product.label.category}"/>
+                        <select th:field="*{category}" id="category" name="category" class="form-control">
+                            <option th:text="#{global.dropdown.select}" value=""/>
+                            <option th:each="m : ${categoryList}" th:value="${m.id}" th:text="${m.name}"/>
+                        </select>
+                        <input type="hidden" th:field="*{category}"/>
+                        <span class="help-block"><th:block th:each="err : ${#fields.errors('category')}" th:text="${err}"/></span>
+                    </div>
+                    <div class="box-body">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" th:field="*{available}" th:text="#{product.label.available}"/>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="box-footer">
-                    <a th:href="@{/setting/organization}" type="button" class="btn btn-danger" th:text="#{global.button.cancel}"/>
+                    <a th:href="@{/product}" type="button" class="btn btn-danger" th:text="#{global.button.cancel}"/>
                     <button type="submit" class="btn btn-primary" th:text="*{id == null} ? #{global.button.submit} : #{global.button.update}"/>
                 </div>
             </div>
