@@ -84,10 +84,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "id") Product product, Model model, Locale locale) {
+    public String delete(@RequestParam(value = "id") Product product, Model model, Locale locale, RedirectAttributes redirectAttributes) {
         productDao.delete(product.getId());
-        model.addAttribute("successMsg", messageSource.getMessage("global.notif.success.delete", new Object[]{product.getName()}, locale));
-        return "product/list";
+        redirectAttributes.addFlashAttribute("successMsg", messageSource.getMessage("global.notif.success.delete", new Object[]{product.getName()}, locale));
+        return "redirect:/product";
     }
 
 }
