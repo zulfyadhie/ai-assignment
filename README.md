@@ -10,7 +10,11 @@ This application is developed for AI assignment.
 
 ## Installation
 1. Restore "assignment database"
+```
 psql -U postgres assignment < initial_data.sql
+```
 2. Open application.properties and set username, password, and database name with correct name.
 3. run application
+```
 mvn spring-boot:run
+```
