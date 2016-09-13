@@ -9,12 +9,17 @@ This application is developed for AI assignment.
 6. PostgreSQL database
 
 ## Installation
-1. Restore "assignment database"
+* Restore "assignment database"
 ```
 psql -U postgres assignment < initial_data.sql
 ```
-2. Open application.properties and set username, password, and database name with correct name.
-3. run application
+* Open application.properties and set username, password, and database name with correct name.
+* run application
 ```
 mvn spring-boot:run
 ```
+* Open browser and type
+```
+http://localhost:8080
+```
+* Login with username and password "admin"
